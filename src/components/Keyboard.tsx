@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Check, Delete, SearchX } from "lucide-react";
+import { Delete } from "lucide-react";
 import { cn } from "../utils/cn";
 import type { TileStatus } from "../game/types";
 
@@ -118,29 +118,27 @@ export function Keyboard({
                       "0 8px 16px -9px rgba(45,76,55,0.75)",
                     ],
                   }
-                : { boxShadow: "0 6px 12px -10px rgba(45,76,55,0.55)" }
+                : invalid
+                  ? { x: [0, -2.5, 2.5, -1.5, 1.5, 0] }
+                  : { boxShadow: "0 6px 12px -10px rgba(45,76,55,0.55)" }
             }
-            transition={valid ? { duration: 2.1, repeat: Infinity, ease: "easeInOut" } : { duration: 0.2 }}
+            transition={
+              valid
+                ? { duration: 2.1, repeat: Infinity, ease: "easeInOut" }
+                : invalid
+                  ? { duration: 0.35, ease: "easeInOut" }
+                  : { duration: 0.2 }
+            }
             className={cn(
-              "key flex-[1.55] gap-1 px-1 text-[9px] font-bold uppercase leading-none tracking-[0.06em] transition-colors",
-              valid && "key-accent ring-1 ring-[#b6cfae]/70",
-              invalid && "border-[#d8c29c]/80 bg-gradient-to-br from-[#f4e9d4] to-[#e8d8bb] text-[#8d7547] shadow-[inset_0_1px_0_rgba(255,255,255,0.85),0_2px_0_rgba(170,146,105,0.28)]",
-              enterState === "incomplete" && "text-[#7d8a7a] opacity-80",
+              "key flex-[1.55] px-1 text-center font-bold uppercase transition-all duration-200 select-none",
+              valid && "key-accent ring-1 ring-[#b6cfae]/70 text-[9px] xs:text-[10px] tracking-[0.08em]",
+              invalid &&
+                "border-[#d8be9c]/90 bg-gradient-to-br from-[#f8ece0] to-[#ecd7c2] text-[#8e6440] shadow-[inset_0_1px_0_rgba(255,255,255,0.9),0_2px_0_rgba(175,130,90,0.3)] text-[7.5px] xs:text-[8.5px] tracking-tight whitespace-nowrap",
+              enterState === "incomplete" && "text-[#7d8a7a] opacity-75 text-[9px] xs:text-[10px] tracking-[0.06em]",
             )}
-            aria-label={invalid ? "Not a word — press to check" : valid ? "Submit word" : "Enter, word incomplete"}
+            aria-label={invalid ? "Not a word in dictionary" : valid ? "Submit word" : "Enter"}
           >
-            {valid ? (
-              <>
-                <Check className="h-3 w-3" strokeWidth={2.8} /> Enter
-              </>
-            ) : invalid ? (
-              <>
-                <SearchX className="h-3 w-3" strokeWidth={2.2} />
-                <span className="leading-[1.05]">Not a<br />word</span>
-              </>
-            ) : (
-              "Enter"
-            )}
+            {invalid ? "Not a word" : "Enter"}
           </motion.button>
         )}
       </div>

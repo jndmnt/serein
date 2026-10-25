@@ -588,7 +588,7 @@ function FeverPrelude() {
 }
 
 function FieldWhisper() {
-  const { fieldNotice, clearFieldNotice, classic, mode, validation } = useGame();
+  const { fieldNotice, clearFieldNotice, classic, mode } = useGame();
   const [dismissed, setDismissed] = useState(false);
 
   useEffect(() => {
@@ -599,12 +599,12 @@ function FieldWhisper() {
     return (
       <motion.div
         key={fieldNotice.key}
-        initial={{ opacity: 0, y: 7, scale: 0.98 }}
+        initial={{ opacity: 0, y: 5, scale: 0.98 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         exit={{ opacity: 0 }}
         transition={{ type: "spring", stiffness: 420, damping: 30 }}
         className={cn(
-          "flex min-h-[26px] shrink-0 items-center justify-center gap-1.5 rounded-full border px-3 py-1 shadow-[inset_0_1px_0_rgba(255,255,255,0.8)]",
+          "flex shrink-0 items-center justify-center gap-1.5 rounded-full border px-3 py-1 shadow-[inset_0_1px_0_rgba(255,255,255,0.8)]",
           fieldNotice.tone === "success"
             ? "border-[#b9cdb2]/80 bg-gradient-to-r from-[#eaf1e2]/95 to-[#e2ecdb]/90 text-[#5d7a5c]"
             : "border-[#dcc6a0]/70 bg-gradient-to-r from-[#f5ead4]/90 to-[#f1e4cd]/85 text-[#7d6840]",
@@ -616,34 +616,30 @@ function FieldWhisper() {
           <SearchX className="h-3 w-3 shrink-0" strokeWidth={2} />
         )}
         <span className="truncate text-[9px] font-bold">{fieldNotice.text}</span>
-        <span
-          className={cn(
-            "hidden truncate text-[8px] font-medium xs:inline",
-            fieldNotice.tone === "success" ? "text-[#869a80]" : "text-[#9b8761]",
-          )}
+        {fieldNotice.detail && (
+          <span
+            className={cn(
+              "hidden truncate text-[8px] font-medium xs:inline",
+              fieldNotice.tone === "success" ? "text-[#869a80]" : "text-[#9b8761]",
+            )}
+          >
+            · {fieldNotice.detail}
+          </span>
+        )}
+        <button
+          onClick={clearFieldNotice}
+          aria-label="Dismiss"
+          className="ml-0.5 grid h-4 w-4 shrink-0 place-items-center rounded-full bg-white/50 text-muted hover:bg-white"
         >
-          · {fieldNotice.detail}
-        </span>
-        <button onClick={clearFieldNotice} aria-label="Dismiss" className="ml-0.5 grid h-4 w-4 shrink-0 place-items-center rounded-full bg-white/50">
           <X className="h-2.5 w-2.5" />
         </button>
       </motion.div>
     );
   }
 
-  if (validation.complete && !validation.valid) {
-    return (
-      <div className="flex min-h-[26px] shrink-0 items-center justify-center gap-1.5 rounded-full border border-[#e0cdb0]/60 bg-white/35 px-3 py-1">
-        <SearchX className="h-3 w-3 shrink-0 text-[#a38a5c]" />
-        <span className="truncate text-[9px] font-semibold text-[#8b7c5c]">That arrangement isn't a word yet</span>
-        <span className="hidden text-[8px] font-medium text-[#a09a84] xs:inline">· tap a tile to adjust a letter</span>
-      </div>
-    );
-  }
-
   if (mode === "classic" && classic.reveals.length > 0) {
     return (
-      <div className="flex min-h-[26px] shrink-0 items-center justify-center gap-1.5 rounded-full border border-white/65 bg-white/35 px-2.5 py-1">
+      <div className="flex shrink-0 items-center justify-center gap-1.5 rounded-full border border-white/65 bg-white/35 px-2.5 py-1">
         <Sun className="h-3 w-3 shrink-0 text-[#b2914f]" />
         <span className="text-[8px] font-bold uppercase tracking-[0.09em] text-[#8b7a52]">Sunbeam</span>
         {classic.reveals
@@ -663,7 +659,7 @@ function FieldWhisper() {
     );
   }
 
-  return <div className="min-h-[26px] shrink-0" aria-hidden />;
+  return null;
 }
 
 function GardenStrip() {

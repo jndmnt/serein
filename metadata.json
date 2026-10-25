@@ -1,0 +1,5 @@
+{
+  "name": "Serein — A Word Ritual",
+  "description": "Serein — a deeply calming word ritual. Play Zen Classic, Word Fever, and friend duels with tactile ceramic tiles, soft chimes, and a garden of dewdrops.",
+  "capabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

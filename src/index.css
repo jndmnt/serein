@@ -748,7 +748,7 @@ input {
     0 0 0 3px rgba(196, 173, 129, 0.22),
     0 0 24px -2px rgba(202, 174, 121, 0.4);
 }
-[data-glaze="sandstone"] .key {
+[data-glaze="sandstone"] .key:not(.key-correct):not(.key-present):not(.key-absent):not(.key-accent):not(.key-eliminated) {
   background: linear-gradient(168deg, #fffaf0 0%, #f5ead7 58%, #ecdfc8 100%);
 }
 [data-glaze="moss"] .tile-empty,
@@ -767,7 +767,7 @@ input {
     0 0 0 3px rgba(133, 165, 124, 0.2),
     0 0 24px -2px rgba(129, 163, 129, 0.42);
 }
-[data-glaze="moss"] .key {
+[data-glaze="moss"] .key:not(.key-correct):not(.key-present):not(.key-absent):not(.key-accent):not(.key-eliminated) {
   background: linear-gradient(168deg, #fbfdf6 0%, #edf3e5 58%, #e0ead7 100%);
 }
 [data-glaze="opaline"] .tile-empty,
@@ -786,8 +786,35 @@ input {
     0 0 0 3px rgba(155, 180, 170, 0.2),
     0 0 24px -2px rgba(133, 163, 151, 0.38);
 }
-[data-glaze="opaline"] .key {
+[data-glaze="opaline"] .key:not(.key-correct):not(.key-present):not(.key-absent):not(.key-accent):not(.key-eliminated) {
   background: linear-gradient(168deg, #fdfefd 0%, #f1f5f2 58%, #e6ece8 100%);
+}
+
+/* Guard: Evaluated key states ALWAYS maintain their respective jade/honey/stone semantic colors */
+[data-glaze] .key.key-correct {
+  background: linear-gradient(160deg, #729a76 0%, #4f7c5c 55%, #3c654a 100%) !important;
+  color: #fdfcf5 !important;
+  border-color: rgba(255, 255, 255, 0.28) !important;
+}
+[data-glaze] .key.key-present {
+  background: linear-gradient(160deg, #e3c286 0%, #cea25d 55%, #bc8f4b 100%) !important;
+  color: #453820 !important;
+  border-color: rgba(255, 255, 255, 0.36) !important;
+}
+[data-glaze] .key.key-absent {
+  background: linear-gradient(160deg, #edf0ee 0%, #dbe1de 55%, #ced6d2 100%) !important;
+  color: #6d7c73 !important;
+  border-color: rgba(255, 255, 255, 0.7) !important;
+}
+[data-glaze] .key.key-accent {
+  background: linear-gradient(160deg, #6a8872 0%, #4e6b56 55%, #3f5b48 100%) !important;
+  color: #fbfaf3 !important;
+  border-color: rgba(255, 255, 255, 0.26) !important;
+}
+[data-glaze] .key.key-eliminated {
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.04)) !important;
+  border: 1px dashed rgba(105, 121, 106, 0.25) !important;
+  color: rgba(75, 90, 78, 0.25) !important;
 }
 
 /* ————— Living details ————— */

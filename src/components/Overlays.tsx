@@ -329,8 +329,8 @@ export function ResultOverlay() {
                 ))}
               </div>
               {fever.lastWord && (
-                <div className="mt-2 flex justify-center">
-                  <WordLookup word={fever.lastWord} />
+                <div className="mt-2 text-left">
+                  <WordLookup word={fever.lastWord} variant="inline" />
                 </div>
               )}
               </>
@@ -342,8 +342,8 @@ export function ResultOverlay() {
                 <div className="mt-2">
                   <WordTiles word={classic.word} tone={won ? "correct" : "plain"} />
                 </div>
-                <div className="mt-2 flex justify-center">
-                  <WordLookup word={classic.word} />
+                <div className="mt-2.5 text-left">
+                  <WordLookup word={classic.word} variant="inline" />
                 </div>
               </div>
             )}

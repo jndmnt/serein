@@ -47,16 +47,16 @@ export function WordLookup({
       <div className={cn("relative", className)}>
         <button
           onClick={() => setOpen((v) => !v)}
-          className="flex w-full items-center justify-between gap-2 rounded-[13px] border border-white/65 bg-white/40 px-2.5 py-2 text-left transition-colors hover:bg-white/60"
+          className="flex w-full items-center justify-between gap-2 rounded-[13px] border border-white/65 bg-white/45 px-2.5 py-1.5 text-left transition-colors hover:bg-white/65"
           aria-expanded={open}
           aria-label={`Meaning of ${word}`}
         >
           <span className="flex items-center gap-1.5">
-            <BookOpen className="h-3 w-3 text-[#84927d]" strokeWidth={1.8} />
-            <span className="text-[8.5px] font-bold uppercase tracking-[0.08em] text-[#6c7e6a]">Field notes</span>
+            <BookOpen className="h-3 w-3 text-[#778b74]" strokeWidth={1.8} />
+            <span className="text-[8.5px] font-bold uppercase tracking-[0.08em] text-[#556953]">Field notes & meaning</span>
           </span>
-          <span className="flex items-center gap-1 text-[8px] font-semibold text-[#909a88]">
-            {open ? "hide" : "what does it mean?"}
+          <span className="flex items-center gap-1 text-[8px] font-semibold text-[#80907c]">
+            {open ? "hide" : "explore word"}
           </span>
         </button>
         <AnimatePresence initial={false}>
@@ -92,7 +92,7 @@ export function WordLookup({
       <AnimatePresence>
         {open && (
           <motion.div
-            className="fixed inset-0 z-[95] flex items-end justify-center p-3 sm:items-center"
+            className="fixed inset-0 z-[95] flex items-center justify-center p-4 sm:p-6"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -106,11 +106,11 @@ export function WordLookup({
               role="dialog"
               aria-modal="true"
               aria-label={`Meaning of ${word}`}
-              initial={{ y: 28, opacity: 0, scale: 0.97 }}
+              initial={{ y: 20, opacity: 0, scale: 0.97 }}
               animate={{ y: 0, opacity: 1, scale: 1 }}
-              exit={{ y: 18, opacity: 0 }}
+              exit={{ y: 16, opacity: 0 }}
               transition={{ type: "spring", stiffness: 280, damping: 28 }}
-              className="glass-deep relative w-full max-w-[23rem] overflow-hidden rounded-[26px] p-4"
+              className="glass-deep relative w-full max-w-[23rem] max-h-[85dvh] overflow-y-auto no-scrollbar rounded-[26px] p-4"
             >
               <button
                 onClick={() => setOpen(false)}
@@ -179,7 +179,7 @@ function MeaningBody({
           </div>
           <p className={cn("mt-1.5 leading-relaxed text-[#5c6d5b]", compact ? "text-[10px]" : "text-[11.5px]")}>{meaning.gloss}</p>
           {meaning.example && (
-            <p className="mt-1.5 border-l-2 border-[#c9d8c2] pl-2 text-[9px] italic leading-relaxed text-[#829080]">
+            <p className="mt-1.5 rounded-[8px] bg-white/40 px-2 py-1 text-[8.5px] italic leading-relaxed text-[#768673]">
               “{meaning.example}”
             </p>
           )}
